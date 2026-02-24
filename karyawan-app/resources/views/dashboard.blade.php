@@ -51,7 +51,7 @@
         <p class="text-muted mb-3">
             Anda login sebagai <strong>{{ strtoupper(auth()->user()->role) }}</strong>.
         </p>
-        @if(auth()->user()->isAdmin())
+        @if(auth()->user()->role === 'admin')
             <a href="{{ route('karyawan.create') }}" class="btn btn-primary me-2">
                 <i class="bi bi-plus-circle me-1"></i>Tambah Karyawan
             </a>
@@ -59,9 +59,7 @@
         <a href="{{ route('karyawan.index') }}" class="btn btn-outline-primary me-2">
             <i class="bi bi-list-ul me-1"></i>Lihat Data
         </a>
-        <a href="{{ route('report.index') }}" class="btn btn-outline-secondary">
-            <i class="bi bi-graph-up me-1"></i>Lihat Report
-        </a>
+
     </div>
 </div>
 @endsection

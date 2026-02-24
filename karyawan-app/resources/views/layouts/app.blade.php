@@ -54,20 +54,15 @@
         <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
             <i class="bi bi-speedometer2 me-2"></i> Dashboard
         </a>
-        <a href="{{ route('karyawan.index') }}" class="nav-link {{ request()->routeIs('karyawan.*') ? 'active' : '' }}">
+        <a href="{{ route('karyawan.index') }}" class="nav-link">
             <i class="bi bi-person-badge me-2"></i> Data Karyawan
         </a>
-        @if(auth()->user()->isAdmin())
-        <a href="{{ route('karyawan.create') }}" class="nav-link">
+        @if(auth()->user()->role === 'admin')
+        <a href="{{ route('karyawan.create') }}" class="nav-link {{ request()->routeIs('karyawan.create') ? 'active' : '' }}">
             <i class="bi bi-person-plus me-2"></i> Tambah Karyawan
         </a>
         @endif
-        <a href="{{ route('report.index') }}" class="nav-link {{ request()->routeIs('report.*') ? 'active' : '' }}">
-            <i class="bi bi-file-earmark-bar-graph me-2"></i> Report
-        </a>
-        <a href="{{ route('profile.edit') }}" class="nav-link {{ request()->routeIs('profile.*') ? 'active' : '' }}">
-            <i class="bi bi-person-circle me-2"></i> Profile
-        </a>
+        
     </nav>
 </div>
 
@@ -84,7 +79,7 @@
             @endif
             <div>
                 <div class="fw-semibold small">{{ auth()->user()->name }}</div>
-                <span class="badge {{ auth()->user()->isAdmin() ? 'bg-danger' : 'bg-success' }} text-white" style="font-size:10px">
+                <span class="badge {{ auth()->user()->role === 'admin' ? 'bg-danger' : 'bg-success' }} text-white" style="font-size:10px">
                     {{ strtoupper(auth()->user()->role) }}
                 </span>
             </div>

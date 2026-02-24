@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KaryawanController;
@@ -14,8 +13,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan.index');
-    Route::get('/karyawan/{karyawan}', [KaryawanController::class, 'show'])->name('karyawan.show');
 
     Route::middleware('role:admin')->group(function () {
         Route::get('/karyawan/create', [KaryawanController::class, 'create'])->name('karyawan.create');
@@ -24,6 +21,9 @@ Route::middleware('auth')->group(function () {
         Route::put('/karyawan/{karyawan}', [KaryawanController::class, 'update'])->name('karyawan.update');
         Route::delete('/karyawan/{karyawan}', [KaryawanController::class, 'destroy'])->name('karyawan.destroy');
     });
+
+    Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan.index');
+    Route::get('/karyawan/{karyawan}', [KaryawanController::class, 'show'])->name('karyawan.show');
 
     Route::get('/report', [ReportController::class, 'index'])->name('report.index');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
